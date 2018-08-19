@@ -35,10 +35,6 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    allowedHosts: [
-      '.localtunnel.me'
-    ],
-    public: 'horrible-owl-97.localtunnel.me'
   },
   plugins: [
     new HtmlWebPackPlugin({
