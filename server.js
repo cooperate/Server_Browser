@@ -11,6 +11,7 @@ io.on("connection", socket => {
   console.log("client connected.");
   socket.on('Login', payload => socket.broadcast.emit('NewUser', payload));
   socket.on('Message', payload => socket.broadcast.emit('NewMessage', payload));
+  socket.on('NewRoom', payload => socket.broadcast.emit('NewRoom', payload));
   socket.on("disconnect", () => console.log("Client disconnected"));
 });
 

@@ -1,10 +1,11 @@
-import { NEW_USER, NEW_MESSAGE, USER_LOGIN } from "../constants/action-types";
+import { NEW_USER, NEW_MESSAGE, NEW_ROOM, USER_LOGIN } from "../constants/action-types";
 import { socketClient } from "../socket";
 
 const initialState = {
   users: [],
   messages: [],
-  user: []
+  user: [],
+  rooms: []
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,6 +15,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, messages: [...state.messages, action.payload] };
     case USER_LOGIN:
       return { ...state, user: [...state.user, action.payload] };
+    case NEW_ROOM:
+      return { ...state, rooms: [...state.rooms, action.payload] };
     default:
       return state;
   }

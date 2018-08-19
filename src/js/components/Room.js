@@ -4,11 +4,11 @@ import Messages from "./Messages"
 import MessageInput from "./MessageInput"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Main = () => (
+const Room = ({ match }) => (
   <div className="container-fluid">
   	<div className="row">
   		<div className="col text-center">
-    		<h1>Server Browser</h1>
+    		<h1>{match.params.roomName}</h1>
     	</div>
     </div>
     <div className="row">
@@ -22,4 +22,4 @@ const Main = () => (
     </div>
   </div>
 );
-export default Main;
+export default Room;

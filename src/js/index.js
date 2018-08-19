@@ -20,6 +20,7 @@ const store = createStore(
     ),
   ),
 )
+window.store = store;
 render(
     <AppContainer>
       <Provider store={store}>

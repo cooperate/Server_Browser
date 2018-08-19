@@ -10,7 +10,7 @@ const mapDispatchToProps = dispatch => {
   return {
     userSelf: user => dispatch(userSelf(user)),
     newUser: user => dispatch(newUser(user)),
-    loginSuccess: () => dispatch(push('/')) 
+    loginSuccess: () => dispatch(push('/rooms')) 
   };
 };
 
@@ -48,7 +48,7 @@ class ConnectedForm extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div className="form-group">
-          <label htmlFor="title">Title</label>
+          <label htmlFor="title">Login</label>
           <input
             type="text"
             className="form-control"
