@@ -5,12 +5,21 @@ import { render } from "react-dom"
 import { Provider } from "react-redux"
 import { Route, Switch } from 'react-router' // react-router v4
 import { connectRouter, routerMiddleware } from 'connected-react-router'
-import { newUser } from "./actions/index"
+import rootReducer from "./reducers"
 import React from "react"
-import store from "./store/index"
-import App from "./components/App"
-window.store = store;
-window.newUser = newUser;
+import App from "./App"
+import socketListeners from './socket/listeners'
+const history = createBrowserHistory()
+
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(
+  connectRouter(history)(rootReducer),
+  composeEnhancer(
+    applyMiddleware(
+      routerMiddleware(history),
+    ),
+  ),
+)
 render(
     <AppContainer>
       <Provider store={store}>
@@ -19,6 +28,9 @@ render(
     </AppContainer>,
   document.getElementById("app")
 );
+
+socketListeners(store);
+
 // Hot reloading
 if (module.hot) {
   // Reload components

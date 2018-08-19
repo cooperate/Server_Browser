@@ -1,8 +1,10 @@
 import React from "react";
 import UserList from "./UserList"
+import Messages from "./Messages"
+import MessageInput from "./MessageInput"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const App = () => (
+const Main = () => (
   <div className="container-fluid">
   	<div className="row">
   		<div className="col text-center">
@@ -10,10 +12,14 @@ const App = () => (
     	</div>
     </div>
     <div className="row">
-    	<div className="col">
+    	<div className="col-3">
     		<UserList />
     	</div>
+      <div className="col-9">
+        <Messages />
+        <MessageInput />
+      </div>
     </div>
   </div>
 );
-export default App;
+export default Main;
