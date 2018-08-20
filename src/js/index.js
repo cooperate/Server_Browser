@@ -31,11 +31,9 @@ render(
 );
 
 history.listen((location, action) => {
-  if(location.pathname.match(/\/rooms\/..*/i) != null){
-      console.log('matched');
+  if(location.pathname.match(/\/rooms\/..*/i) != null) {
       return;
-  }else{
-      console.log('nope');
+  }else {
       return;
   }
 });

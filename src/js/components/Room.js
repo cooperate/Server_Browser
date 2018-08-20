@@ -28,7 +28,6 @@ class RoomStateful extends Component {
   }
 
   componentWillUnmount() {
-    console.log('Leaving Room');
     const roomId = this.props.location.state.roomId;
     const userId = this.props.userId;
     const id = this.props.location.state.userRoomId;
