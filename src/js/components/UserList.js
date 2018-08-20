@@ -29,5 +29,7 @@ const ConnectedList = ({ users }) => (
     ))}
   </ul>
 );
+
 const UserList = connect(mapStateToProps)(ConnectedList);
+
 export default UserList;
