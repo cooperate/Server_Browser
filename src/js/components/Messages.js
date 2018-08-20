@@ -2,9 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'lodash';
 
-const mapStateToProps = state => {
-  return { messages: state.messages };
+const mapStateToProps = (state, ownProps) => {
+  var messages = _.filter(state.messages, { 'roomId': ownProps.roomId });
+  return { messages: messages };
 };
 const MessageList = ({ messages }) => (
   <ul className="list-group list-group-flush">

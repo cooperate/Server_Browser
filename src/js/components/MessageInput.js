@@ -14,8 +14,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   //TODO: Fetch username by ID
   if(state.user[0]){
-    var [user] = state.user;  
-    console.log(user.name);
+    var [user] = state.user; 
     return { name: user.name };
   } else {
     return { name: 'default' };
@@ -23,8 +22,8 @@ const mapStateToProps = state => {
 };
 
 class SendMessage extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       name: "",
@@ -44,13 +43,14 @@ class SendMessage extends Component {
     const { name } = this.props;
     const { message } = this.state;
     const timestamp = Date.now();
+    const { roomId } = this.props;
     const id = cuid();
     
-    this.props.newMessage({ name, message, timestamp, id });
+    this.props.newMessage({ name, message, timestamp, roomId, id });
     this.setState({ name: name,
       message: "" });
 
-    socketClient.emit('Message', { name, message, timestamp, id });
+    socketClient.emit('Message', { name, message, timestamp, roomId, id });
   }
 
   render() {

@@ -2,20 +2,37 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import cuid from 'cuid';
-import { newRoom } from "../actions/index"
+import { newRoom, newRoomConnection, userJoinRoom } from "../actions/index"
 import { socketClient } from '../socket'
 import { push } from 'connected-react-router'
 
 const mapDispatchToProps = dispatch => {
   return {
     newRoom: room => dispatch(newRoom(room)),
-    roomSuccess: () => dispatch(push('/rooms')) 
+    roomSuccess: (room) => {
+      var location = {
+        pathname: '/rooms/' + room.roomName,
+        state: { roomId: room.roomId, userRoomId: room.userRoomId }
+      }
+      dispatch(push(location))
+    },
+    userJoinRoom: userRoom => dispatch(userJoinRoom(userRoom))
   };
 };
 
+const mapStateToProps = state => {
+  var userId;
+  if(state.user[0]){
+    userId = state.user[0].id;
+  } else {
+    userId = 'default';
+  }
+  return { userId: userId };
+};
+
 class CreateRoomForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       roomName: "",
@@ -37,11 +54,15 @@ class CreateRoomForm extends Component {
     const { roomDesc } = this.state;
     const { roomPlayerCount } = this.state;
     const id = cuid();
+    const userId = this.props.userId;
+    const userRoomId = cuid();
     
     this.props.newRoom({ roomName, roomDesc, roomPlayerCount, id });
     socketClient.emit('NewRoom', { roomName, roomDesc, roomPlayerCount, id });
     this.setState({ roomName: "" });
-    this.props.roomSuccess();
+    this.props.userJoinRoom({roomId: id, userId: userId, id: userRoomId});
+    socketClient.emit('UserRoomData', {roomId: id, userId: userId, id: userRoomId});
+    this.props.roomSuccess({roomId: id, roomName: roomName, userRoomId: userRoomId});
   }
 
   render() {
@@ -85,6 +106,6 @@ class CreateRoomForm extends Component {
   }
 }
 
-const RoomForm = connect(null, mapDispatchToProps)(CreateRoomForm);
+const RoomForm = connect(mapStateToProps, mapDispatchToProps)(CreateRoomForm);
 
 export default RoomForm;

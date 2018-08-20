@@ -1,5 +1,10 @@
-import { NEW_USER, NEW_MESSAGE, NEW_ROOM, USER_LOGIN } from "../constants/action-types";
+import { NEW_USER, NEW_MESSAGE, NEW_ROOM, USER_LOGIN, USER_JOIN_ROOM, USER_LEAVE_ROOM, LOAD_USERS, LOAD_ROOMS, LOAD_USER_ROOMS } from "../constants/action-types";
 export const newUser = user => ({ type: NEW_USER, payload: user });
 export const userSelf = user => ({ type: USER_LOGIN, payload: user });
 export const newMessage = message => ({ type: NEW_MESSAGE, payload: message });
 export const newRoom = room => ({ type: NEW_ROOM, payload: room });
+export const userJoinRoom = userRoom => ({ type: USER_JOIN_ROOM, index: userRoom.id, payload: userRoom });
+export const userLeaveRoom = userRoom => ({ type: USER_LEAVE_ROOM, index: userRoom.id, payload: userRoom });
+export const loadUsers = users => ({ type: LOAD_USERS, payload: users });
+export const loadRooms = rooms => ({ type: LOAD_ROOMS, payload: rooms });
+export const loadUserRooms = userRooms => ({ type: LOAD_USER_ROOMS, payload: userRooms });

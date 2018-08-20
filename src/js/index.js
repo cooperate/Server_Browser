@@ -30,6 +30,16 @@ render(
   document.getElementById("app")
 );
 
+history.listen((location, action) => {
+  if(location.pathname.match(/\/rooms\/..*/i) != null){
+      console.log('matched');
+      return;
+  }else{
+      console.log('nope');
+      return;
+  }
+});
+
 socketListeners(store);
 
 // Hot reloading
