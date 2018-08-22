@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import cuid from 'cuid';
 import { newMessage } from "../actions/index";
 import { socketClient } from '../socket'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './MessageInput.css';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -56,18 +58,18 @@ class SendMessage extends Component {
   render() {
     const { message } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="title">Send Message</label>
+      <form onSubmit={this.handleSubmit} className="messageInput">
+        <div className="form-group messageField">
           <input
             type="text"
             className="form-control"
             id="message"
             value={message}
             onChange={this.handleChange}
+            placeholder="Send Message"
           />
         </div>
-        <button type="submit" className="btn btn-success btn-lg">
+        <button type="submit" className="btn btn-success messageSend">
           SEND
         </button>
       </form>

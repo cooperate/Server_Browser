@@ -1,0 +1,15 @@
+.messageInput {
+	width: 100%;
+	display: inline-flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.messageField {
+	flex-basis: 80%;
+	margin-bottom: 0;
+}
+
+.messageSend {
+	flex-basis: 20%;
+}

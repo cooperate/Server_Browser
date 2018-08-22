@@ -6,6 +6,7 @@ import { socketClient } from '../socket'
 import { connect } from 'react-redux'
 import { userLeaveRoom } from '../actions/index'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import style from './Room.css'
 
 const mapStateToProps = state => {
   if(state.user[0]){
@@ -38,19 +39,23 @@ class RoomStateful extends Component {
   render(){
     const roomId = this.props.location.state.roomId;
     return (
-      <div className="container-fluid">
-      	<div className="row">
+      <div className="container-fluid roomContainer">
+      	<div className="row chatTitle">
       		<div className="col text-center">
         		<h1>{this.props.match.params.roomName}</h1>
         	</div>
         </div>
-        <div className="row">
+        <div className="row chatWindow">
         	<div className="col-3">
         		<UserList roomId={roomId}/>
         	</div>
           <div className="col-9">
-            <Messages roomId={roomId}/>
-            <MessageInput roomId={roomId}/>
+            <div className="row messageList">
+              <Messages roomId={roomId}/>
+            </div>
+            <div className="row messageInput">
+              <MessageInput roomId={roomId}/>
+            </div>
           </div>
         </div>
       </div>

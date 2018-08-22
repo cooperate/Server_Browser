@@ -1,0 +1,14 @@
+.messageList {
+	height: 90%;
+}
+.roomContainer {
+	height: 93vh;
+	position: fixed;
+}
+
+.chatTitle {
+	height: 10%;
+}
+.chatWindow {
+	height: 90%;
+}
