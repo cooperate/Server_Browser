@@ -48,11 +48,13 @@ class SendMessage extends Component {
     const { roomId } = this.props;
     const id = cuid();
     
-    this.props.newMessage({ name, message, timestamp, roomId, id });
-    this.setState({ name: name,
-      message: "" });
+    if(this.state.message != "") {
+      this.props.newMessage({ name, message, timestamp, roomId, id });
+      this.setState({ name: name,
+        message: "" });
 
-    socketClient.emit('Message', { name, message, timestamp, roomId, id });
+      socketClient.emit('Message', { name, message, timestamp, roomId, id });
+    }
   }
 
   render() {
