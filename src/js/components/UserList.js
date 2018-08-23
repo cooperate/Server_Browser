@@ -3,16 +3,9 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import 'lodash';
 
-const mapStateToProps = (state, ownProps) => {
-  var userRooms = _.filter(state.userRoom, { 'roomId': ownProps.roomId }); 
-  var users = new Array();
-  userRooms.map(userRoom => {
-    users.push(_.filter(state.users, { 'id': userRoom.userId })[0])
-    });
-  return { users: users };
-};
-
-const ConnectedList = ({ users }) => (
+/*TODO should this ConnectedList abstract another component called UserList?
+UserList shouldn't be part of this logic.*/
+const UserList = ({ users }) => (
   <ul className="list-group list-group-flush">
     {users.map(el => (
       <li className="list-group-item" key={el.id}>
@@ -21,7 +14,5 @@ const ConnectedList = ({ users }) => (
     ))}
   </ul>
 );
-
-const UserList = connect(mapStateToProps)(ConnectedList);
 
 export default UserList;

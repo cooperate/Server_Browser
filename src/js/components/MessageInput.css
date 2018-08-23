@@ -3,6 +3,7 @@
 	display: inline-flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
+	margin: 0 auto;
 }
 
 .messageField {

@@ -4,11 +4,33 @@
 .roomContainer {
 	height: 93vh;
 	position: fixed;
+	align-items: stretch;
+	display: flex;
 }
 
+.sidebar {
+	min-width: 250px;
+	max-width: 250px;
+	padding-right: 15px;
+}
+.content {
+	width: 100%;
+	max-width: 100%;
+}
+.sidebar.active {
+    margin-left: -250px;
+}
 .chatTitle {
 	height: 10%;
 }
 .chatWindow {
 	height: 90%;
+}
+@media (max-width: 768px) {
+    .sidebar {
+        margin-left: -250px;
+    }
+    .sidebar.active {
+        margin-left: 0;
+    }
 }

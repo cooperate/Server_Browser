@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import UserList from './UserList'
+import ConnectedList from './ConnectedList'
 import Messages from './Messages'
 import MessageInput from './MessageInput'
 import { socketClient } from '../socket'
@@ -36,25 +36,38 @@ class RoomStateful extends Component {
     socketClient.emit('UserLeaveRoom', {roomId, userId, id});
   }
 
+  toggleSidebar() {
+    var element = document.getElementById("sidebar");
+    element.classList.toggle("active");
+  }
+
   render(){
     const roomId = this.props.location.state.roomId;
     return (
       <div className="container-fluid roomContainer">
-      	<div className="row chatTitle">
-      		<div className="col text-center">
-        		<h1>{this.props.match.params.roomName}</h1>
-        	</div>
+        <div id="sidebar" className="sidebar">
+            <ConnectedList roomId={roomId}/>
         </div>
-        <div className="row chatWindow">
-        	<div className="col-3">
-        		<UserList roomId={roomId}/>
-        	</div>
-          <div className="col-9">
-            <div className="row messageList">
-              <Messages roomId={roomId}/>
+        <div className="content">
+        	<div className="row chatTitle">
+            <div className="col-2">
+               <button type="button" onClick={() => {this.toggleSidebar()}} className="btn btn-info">
+                <i className="fas"></i>
+                <span>+</span>
+            </button>
             </div>
-            <div className="row messageInput">
-              <MessageInput roomId={roomId}/>
+            <div className="col-10 text-center">
+              <h1>{this.props.match.params.roomName}</h1>
+            </div>
+          </div>
+          <div className="row chatWindow">
+            <div className="col-12">
+              <div className="row messageList">
+                <Messages roomId={roomId}/>
+              </div>
+              <div className="row messageInput">
+                <MessageInput roomId={roomId}/>
+              </div>
             </div>
           </div>
         </div>
